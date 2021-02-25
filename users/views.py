@@ -57,3 +57,13 @@ class UserViewset(viewsets.ViewSet):
         
         except:
             return Response({"error": True, "message": "Error During Data Has Been Updated"})
+
+    def destroy(self, request, pk=None):
+        try:
+            queryset = User.objects.all()
+            user = get_object_or_404(queryset, pk=pk)
+            user.delete()
+            return Response({"error": False, "message": "Data Has Been Deleted"})
+        
+        except:
+            return Response({"error": True, "message": "Error During Data Has Been Deleted"})
