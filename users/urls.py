@@ -1,7 +1,15 @@
-from django.urls import path
+from django.urls import path, include
 
-from . import views
+# Routers provide an easy way of automatically determining the URL conf.
+from rest_framework import routers
+from . views import UserViewset
+
+router = routers.DefaultRouter()
+router.register(r'', UserViewset, basename='user')
+
+app_name = 'users'
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('user/', include(router.urls)),
+    
 ]
