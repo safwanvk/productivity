@@ -68,16 +68,18 @@ class ProjectViewset(viewsets.ViewSet):
         except:
             return Response({"error": True, "message": "Error During Data Has Been Deleted"})
 
-class ProjectOnlyViewSet(generics.ListAPIView):
+class ProjectOnlyUserViewSet(generics.ListAPIView):
     serializer_class = ProjectSerializer
 
     def get_queryset(self):
-        return Project.objects.all()
+        user = self.kwargs["user_id"]
+        return Project.objects.filter(user=user)
 
-class ProjectByIdViewSet(generics.ListAPIView):
+class ProjectByIdUserViewSet(generics.ListAPIView):
     serializer_class = ProjectSerializer
 
     def get_queryset(self):
-        id = self.kwargs["id"]
-        return Project.objects.filter(id__contains=id)
+        id = self.kwargs["project_id"]
+        user = self.kwargs["user_id"]
+        return Project.objects.filter(id=id, user=user)
 
