@@ -8,6 +8,7 @@ from projects.models import Project
 
 
 class Task(models.Model):
+    id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.DO_NOTHING,
                                 null=True, blank=True)

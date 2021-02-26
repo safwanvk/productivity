@@ -62,7 +62,7 @@ class ProjectViewset(viewsets.ViewSet):
         try:
             queryset = Project.objects.all()
             project = get_object_or_404(queryset, pk=pk)
-            Project.delete()
+            project.delete()
             return Response({"error": False, "message": "Data Has Been Deleted"})
         
         except:
