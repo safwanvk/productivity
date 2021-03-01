@@ -10,3 +10,6 @@ class User(models.Model):
     linkedin_profile = models.CharField(max_length=255)
     website = models.CharField(max_length=255)
     objects = models.Manager()
+
+    def __str__(self):
+        return self.name

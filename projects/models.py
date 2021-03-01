@@ -12,3 +12,6 @@ class Project(models.Model):
     description = models.TextField(default='', blank=True)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
+
+    def __str__(self):
+        return self.title
