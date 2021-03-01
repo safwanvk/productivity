@@ -82,3 +82,38 @@ class ListByIdUserViewSet(generics.ListAPIView):
         id = self.kwargs["list_id"]
         user = self.kwargs["user_id"]
         return List.objects.filter(id=id, user=user)
+
+
+class ListItemViewset(viewsets.ViewSet):
+
+    def create(self, request):
+        try:
+            serializer = ListItemSerializer(data=request.data, context={"request": request})
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            return Response({"error": False, "message": "List Item Data Save Successfully"})
+        except:
+            return Response({"error": True, "message": "Error During Saving List Item Data"})
+            
+
+    def update(self, request, pk=None):
+        try:
+            queryset = ListItem.objects.all()
+            list_item = get_object_or_404(queryset, pk=pk)
+            serializer = ListItemSerializer(list_item, data=request.data, context={"request": request})
+            serializer.is_valid()
+            serializer.save()
+            return Response({"error": False, "message": "Data Has Been Updated"})
+        
+        except:
+            return Response({"error": True, "message": "Error During Data Has Been Updated"})
+
+    def destroy(self, request, pk=None):
+        try:
+            queryset = ListItem.objects.all()
+            list_item = get_object_or_404(queryset, pk=pk)
+            list_item.delete()
+            return Response({"error": False, "message": "Data Has Been Deleted"})
+        
+        except:
+            return Response({"error": True, "message": "Error During Data Has Been Deleted"})

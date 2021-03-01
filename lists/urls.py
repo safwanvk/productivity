@@ -2,10 +2,11 @@ from django.urls import path, include
 
 # Routers provide an easy way of automatically determining the URL conf.
 from rest_framework import routers
-from . views import ListViewset, ListOnlyUserViewSet, ListByIdUserViewSet
+from . views import ListViewset, ListOnlyUserViewSet, ListByIdUserViewSet, ListItemViewset
 
 router = routers.DefaultRouter()
-router.register(r'', ListViewset, basename='task')
+router.register(r'', ListViewset, basename='list')
+router.register(r'list-items', ListItemViewset, basename='list_item')
 
 app_name = 'lists'
 
