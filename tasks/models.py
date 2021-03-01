@@ -30,3 +30,11 @@ class Task(models.Model):
     def __str__(self):
         return self.title
 
+class Tag(models.Model):
+    text = models.CharField(max_length=25)
+    color = models.CharField(max_length=6, default='424244')
+    tasks = models.ManyToManyField(Task, blank=True)
+
+    def __str__(self):
+        return self.text
+
